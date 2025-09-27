@@ -1,0 +1,22 @@
+nav a {
+    color: #fff;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-weight: 600;
+    /* chữ đậm */
+    font-size: 16px;
+    text-decoration: none;
+    margin: 0 12px;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+nav a:hover {
+    color: #e50914;
+    /* đổi màu khi hover */
+}
+
+nav a.active {
+    color: #f5c518;
+    /* vàng giống hình trái */
+    font-weight: 700;
+    /* đậm hơn */
+}

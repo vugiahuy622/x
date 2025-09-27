@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liên hệ | RapChieuPhim.vn</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #000;
+      color: #fff;
+      background-image: url('https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/505198456_671053332420125_5061000756268426961_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=KN69e48sJcoQ7kNvwEKqL3x&_nc_oc=AdlNAw7FYk1fIBaK9VCBOPActcC7oHDyLNMX0llK6_PtmnAouvY5UqhR2TmrZIR9IW4&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=AyklhuD5g2Y1QfWSxJP9SA&oh=00_AfM6vuiwM7SE7HYEqLVG2n18grB_qiVkiU6m9nQ2L0aHJQ&oe=6865C4C9');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+    }
+
+    /* Header */
+    header {
+      background-color: #141414;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 2px solid #e50914;
+      font-family: 'Segoe UI', sans-serif;
+
+    }
+
+    .logo {
+      font-size: 2rem;
+      color: #f8f0f0;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #e50914;
+    }
+
+    /* Main */
+    main {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: #1c1c1c;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+      font-family: 'Segoe UI', sans-serif;
+
+
+    }
+
+    main h2 {
+      color: #e50914;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      background-color: #333;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+
+    }
+
+    textarea {
+      resize: vertical;
+      height: 120px;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #e50914;
+      border: none;
+      padding: 14px 20px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #b00610;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #141414;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+      border-top: 1px solid #333;
+      font-size: 14px;
+
+    }
+
+    .social a {
+      margin: 0 10px;
+      color: #e50914;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .social a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+
+      header,
+      main {
+        padding: 20px;
+      }
+
+      nav {
+        display: none;
+        /* Đơn giản hóa trên mobile, có thể thêm toggle menu nếu cần */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">🎬 NETFLIX</div>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="datve.html">Đặt Vé</a>
+      <a href="lichchieu.html">Lịch chiếu</a>
+      <a href="dangky.html">Đăng Ký</a>
+      <a href="dangnhap.html">Đăng Nhập</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h2>Liên hệ với Netflix Cinema</h2>
+    <form>
+      <label for="name">Họ và Tên</label>
+      <input type="text" id="name" name="name" placeholder="Nhập họ tên của bạn" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Nhập địa chỉ email" required />
+
+      <label for="message">Nội dung</label>
+      <textarea id="message" name="message" placeholder="Nhập nội dung liên hệ..." required></textarea>
+
+      <button type="submit">Gửi liên hệ</button>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy;© 2025 NETFLIX. All rights reserved.</p>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+  </footer>
+</body>
+
+</html>

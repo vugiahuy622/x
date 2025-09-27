@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Suất Chiếu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>🍿 Cinema Admin</h2>
+        <ul>
+            <li><a href="trangadmin.html">Admin</a></li>
+            <li><a href="movies.html">Phim</a></li>
+            <li><a href="showtimes.html" class="active">Suất chiếu</a></li>
+            <li><a href="tickets.html">Vé</a></li>
+            <li><a href="index.html" target="_blank">🌐 Trang web chính</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>Quản lý Suất chiếu</h1>
+        </div>
+
+        <!-- Form thêm/sửa suất chiếu -->
+        <div class="form-container">
+            <h2>Thêm / Cập nhật suất chiếu</h2>
+            <input type="hidden" id="showtimeId">
+            <label>Tên phim:</label>
+            <input type="text" id="movieName">
+            <label>Ngày:</label>
+            <input type="date" id="date">
+            <label>Giờ:</label>
+            <input type="time" id="time"><br>
+            <label>Phòng : </label>
+            <input type="text" id="room">
+            <label>Giá vé:</label>
+            <input type="number" id="price">
+
+            <button class="action-btn" id="saveBtn">Lưu</button>
+        </div>
+
+        <!-- Bảng danh sách suất chiếu -->
+        <div class="table-container">
+            <h2>Danh sách suất chiếu</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phim</th>
+                        <th>Ngày</th>
+                        <th>Giờ</th>
+                        <th>Phòng</th>
+                        <th>Giá vé</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="showtimeTable"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script>
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlne_gt7K1kWxTbBKcAD2Onvy7B8OUcaA",
+            authDomain: "vghh-7999b.firebaseapp.com",
+            projectId: "vghh-7999b",
+            storageBucket: "vghh-7999b.firebasestorage.app",
+            messagingSenderId: "374520262209",
+            appId: "1:374520262209:web:7118e642efe315baa520c0"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const tableBody = document.getElementById("showtimeTable");
+
+        // Load danh sách suất chiếu
+        function loadShowtimes() {
+            tableBody.innerHTML = "";
+            db.collection("showtimes").get().then(snapshot => {
+                snapshot.forEach(doc => {
+                    const showtime = doc.data();
+                    const row = `
+            <tr>
+              <td>${showtime.movieName}</td>
+              <td>${showtime.date}</td>
+              <td>${showtime.time}</td>
+              <td>${showtime.room}</td>
+              <td>${showtime.price}đ</td>
+              <td>
+                <button class="btn-edit" onclick="editShowtime('${doc.id}','${showtime.movieName}','${showtime.date}','${showtime.time}','${showtime.room}','${showtime.price}')">Sửa</button>
+                <button class="btn-delete" onclick="deleteShowtime('${doc.id}')">Xóa</button>
+              </td>
+            </tr>
+          `;
+                    tableBody.innerHTML += row;
+                });
+            });
+        }
+
+        // Lưu (thêm mới / cập nhật)
+        document.getElementById("saveBtn").addEventListener("click", () => {
+            const id = document.getElementById("showtimeId").value;
+            const movieName = document.getElementById("movieName").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const room = document.getElementById("room").value;
+            const price = document.getElementById("price").value;
+
+            if (!movieName || !date || !time || !room || !price) {
+                alert("Vui lòng nhập đủ thông tin!");
+                return;
+            }
+
+            const data = { movieName, date, time, room, price: parseInt(price) };
+
+            if (id) {
+                db.collection("showtimes").doc(id).update(data).then(() => {
+                    alert("Cập nhật thành công!");
+                    loadShowtimes();
+                    resetForm();
+                });
+            } else {
+                db.collection("showtimes").add(data).then(() => {
+                    alert("Thêm thành công!");
+                    loadShowtimes();
+                    resetForm();
+                });
+            }
+        });
+
+        // Sửa
+        function editShowtime(id, movieName, date, time, room, price) {
+            document.getElementById("showtimeId").value = id;
+            document.getElementById("movieName").value = movieName;
+            document.getElementById("date").value = date;
+            document.getElementById("time").value = time;
+            document.getElementById("room").value = room;
+            document.getElementById("price").value = price;
+        }
+
+        // Xóa
+        function deleteShowtime(id) {
+            if (confirm("Bạn có chắc muốn xóa suất chiếu này?")) {
+                db.collection("showtimes").doc(id).delete().then(() => {
+                    alert("Xóa thành công!");
+                    loadShowtimes();
+                });
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById("showtimeId").value = "";
+            document.getElementById("movieName").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("time").value = "";
+            document.getElementById("room").value = "";
+            document.getElementById("price").value = "";
+        }
+
+        // Gọi load lần đầu
+        loadShowtimes();
+    </script>
+</body>
+
+</html>

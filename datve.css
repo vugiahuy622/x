@@ -1,0 +1,88 @@
+nav a {
+  color: #fff;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  /* chữ đậm */
+
+  text-decoration: none;
+  margin: 0 12px;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+
+nav a:hover {
+  color: #e50914;
+  /* đổi màu khi hover */
+}
+
+nav a.active {
+  color: #f5c518;
+  /* vàng giống hình trái */
+  font-weight: 700;
+  /* đậm hơn */
+}
+
+.booking-form {
+  background: rgba(0, 0, 0, 0.7);
+  /* nền mờ tối */
+  backdrop-filter: blur(10px);
+  /* hiệu ứng mờ */
+  border-radius: 10px;
+  padding: 20px;
+  width: 350px;
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.booking-form h2 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.booking-form label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #fff;
+}
+
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+.booking-form button {
+  width: 100%;
+  padding: 10px;
+  background: #e50914;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.booking-form button:hover {
+  background: #ff2b2b;
+}
+
+.huydz {
+  height: 100px;
+}
+
+#name {
+  background-color: rgb(36, 36, 36);
+
+}
+
+#movie {
+  background-color: rgb(36, 36, 36);
+}
+
+#time {
+  background-color: rgb(36, 36, 36);
+}

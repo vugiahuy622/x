@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Phim</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>🍿 Cinema Admin</h2>
+        <ul>
+            <li><a href="trangadmin.html">Admin</a></li>
+            <li><a href="movies.html" class="active">Phim</a></li>
+            <li><a href="showtimes.html">Suất chiếu</a></li>
+            <li><a href="tickets.html">Vé</a></li>
+            <li><a href="index.html" target="_blank">🌐 Trang web chính</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>Quản lý phim</h1>
+            <button class="logout">Đăng xuất</button>
+        </div>
+
+        <!-- Form thêm phim -->
+        <div class="form-container">
+            <h2>➕ Thêm phim mới</h2>
+            <input type="text" id="image" placeholder="Link ảnh poster">
+            <input type="text" id="name" placeholder="Tên phim">
+            <input type="text" id="genre" placeholder="Thể loại">
+            <input type="text" id="duration" placeholder="Thời lượng (phút)">
+            <button class="action-btn" id="saveButton">Thêm phim</button>
+            <span id="status"></span>
+        </div><br>
+
+        <!-- Danh sách phim -->
+        <div class="table-container">
+            <h2>📽️ Danh sách phim</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Tên phim</th>
+                        <th>Thể loại</th>
+                        <th>Thời lượng</th>
+                        <th>Hành động</th>
+
+                    </tr>
+                </thead>
+                <tbody id="movieList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Firebase config (thay bằng của bạn)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlne_gt7K1kWxTbBKcAD2Onvy7B8OUcaA",
+            authDomain: "vghh-7999b.firebaseapp.com",
+            projectId: "vghh-7999b",
+            storageBucket: "vghh-7999b.firebasestorage.app",
+            messagingSenderId: "374520262209",
+            appId: "1:374520262209:web:7118e642efe315baa520c0",
+            measurementId: "G-D3ZEDNBQ7C"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Thêm phim
+        document.getElementById("saveButton").addEventListener("click", () => {
+            const name = document.getElementById("name").value.trim();
+            const genre = document.getElementById("genre").value.trim();
+            const duration = document.getElementById("duration").value.trim();
+            const image = document.getElementById("image").value.trim();
+
+
+            if (!name || !genre || !duration || !image) {
+                alert("⚠️ Vui lòng nhập đầy đủ thông tin phim!");
+                return;
+            }
+
+            db.collection("movies").doc(name).set({ name, genre, duration, image })
+                .then(() => {
+                    document.getElementById("status").innerText = "✅ Lưu phim thành công!";
+                    document.getElementById("name").value = "";
+                    document.getElementById("genre").value = "";
+                    document.getElementById("duration").value = "";
+                    document.getElementById("image").value = "";
+                    loadMovies();
+                })
+                .catch(err => document.getElementById("status").innerText = "❌ Lỗi: " + err.message);
+        });
+
+        // Hiển thị danh sách phim
+        function loadMovies() {
+            db.collection("movies").get().then(snapshot => {
+                const list = document.getElementById("movieList");
+                list.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const movie = doc.data();
+                    const row = `
+            <tr>
+              <td><img src="${movie.image}" alt="poster" style="width:60px; border-radius:6px;"></td>
+              <td>${movie.name}</td>
+              <td>${movie.genre}</td>
+              <td>${movie.duration} phút</td>
+              <td>
+                <button class="btn-edit" onclick="editMovie('${movie.name}', '${movie.genre}', '${movie.duration}', '${movie.image}')">Sửa</button>
+                <button class="btn-delete" onclick="deleteMovie('${movie.name}')">Xóa</button>
+              </td>
+            </tr>`;
+                    list.innerHTML += row;
+                });
+            });
+        }
+
+        // Sửa phim
+        function editMovie(name, genre, duration, image) {
+            document.getElementById("name").value = name;
+            document.getElementById("genre").value = genre;
+            document.getElementById("duration").value = duration;
+            document.getElementById("image").value = image;
+            document.getElementById("status").innerText = "⚡ Đang chỉnh sửa phim, bấm 'Thêm phim' để cập nhật!";
+        }
+
+        // Xóa phim
+        function deleteMovie(name) {
+            if (confirm("Bạn có chắc muốn xóa phim: " + name + " ?")) {
+                db.collection("movies").doc(name).delete()
+                    .then(() => {
+                        document.getElementById("status").innerText = "🗑️ Đã xóa phim!";
+                        loadMovies();
+                    })
+                    .catch(err => alert("Lỗi xóa: " + err.message));
+            }
+        }
+
+        // Load phim khi mở trang
+        loadMovies();
+    </script>
+</body>
+
+</html>

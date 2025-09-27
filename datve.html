@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặt Vé - Netflix</title>
+  <link rel="stylesheet" href="datve.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #111;
+      color: rgba(255, 255, 255, 0);
+
+      background-image: url("https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/477089Mxo/anh-mo-ta.png");
+      background-size: cover;
+      /* Phủ toàn bộ màn hình */
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 100vh;
+      margin: 0;
+    }
+
+
+    /* Header */
+    header {
+      background: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      border-bottom: 2px solid rgb(255, 0, 0);
+      height: 80px;
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 5px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: rgb(255, 251, 41);
+    }
+
+    /* Form container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+
+    .form-box {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+    }
+
+    .form-box label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+    }
+
+    .form-box input,
+    .form-box select,
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #2a2a2a;
+      color: white;
+      font-size: 15px;
+    }
+
+    .form-box input:focus,
+    .form-box select:focus {
+      outline: none;
+      border-color: red;
+    }
+
+    .form-box button {
+      background: rgb(255, 0, 0);
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    .form-box button:hover {
+      background: darkred;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #000;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>
+      <div class="logo">🎬 NETFLIX</div>
+    </h1>
+    <nav>
+      <ul>
+        <li class="logo-text"><a href="index.html">Trang chủ</a></li>
+        <li class="logo-text"><a href="lichchieu.html">Lịch chiếu</a></li>
+        <li class="logo-text"><a href="datve.html">Đặt Vé</a></li>
+        <li class="logo-text"><a href="dangky.html">Đăng ký</a></li>
+        <li class="logo-text"><a href="dangnhap.html">Đăng nhập</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Form -->
+  <!-- <div class="container">
+    <div class="form-box">
+      <form>
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" placeholder="Nhập họ tên" required>
+
+        <label for="movie">Chọn phim:</label>
+        <select id="movie" required>
+          <option value="">--Chọn phim--</option>
+          <option>Đối đầu</option>
+          <option>Doraemon: Nobita và Vùng Đất Phiêu Lưu</option>
+          <option>Ngày Xưa Có Một Chuyện Tình</option>
+          <option>Làm Giàu Với Ma</option>
+          <option>Ma Da</option>
+          <option>attack on titan</option>
+          <option>marvel hero</option>
+          <option>Môn phái võ mèo</option>
+        </select>
+
+        <label for="time">Chọn thời gian:</label>
+        <input type="datetime-local" id="time" required>
+
+        <button type="submit">Đặt vé ngay</button>
+      </form>
+    </div>
+  </div> --><br><br>
+  <div class="booking-form">
+    <h2>🎟️ Đặt vé ngay</h2>
+    <label for="name">Họ và tên:</label>
+    <input type="text" id="name" placeholder="Nhập họ tên">
+
+    <label for="movie">Chọn phim:</label>
+    <select id="movie">
+      <option>Chọn phim</option>
+      <option>Bố Già</option>
+      <option>Nụ hôn bạc tỷ</option>
+    </select>
+
+    <label for="time">Chọn thời gian:</label>
+    <input type="datetime-local" id="time">
+
+    <button>Đặt vé ngay</button>
+
+
+
+  </div><br><br>
+
+  <!-- Footer -->
+  <footer class="huydz">
+    © 2025 Netflix Vé Phim. All rights reserved.
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDlne_gt7K1kWxTbBKcAD2Onvy7B8OUcaA",
+      authDomain: "vghh-7999b.firebaseapp.com",
+      projectId: "vghh-7999b",
+      storageBucket: "vghh-7999b.firebasestorage.app",
+      messagingSenderId: "374520262209",
+      appId: "1:374520262209:web:7118e642efe315baa520c0",
+      measurementId: "G-D3ZEDNBQ7C"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const ticketsRef = collection(db, "tickets");
+    const select = document.getElementById("movieSelect");
+
+    // 📌 Render vé ra dropdown
+    onSnapshot(ticketsRef, (snapshot) => {
+      select.innerHTML = "<option>--Chọn vé--</option>";
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        select.innerHTML += `<option>${data.movie} | ${data.datetime} | Ghế: ${data.seat}</option>`;
+      });
+    });
+  </script>
+
+</body>
+
+</html>

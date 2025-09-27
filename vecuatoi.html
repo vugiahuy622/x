@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Vé của tôi - Netflix</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #141414;
+            color: #fff;
+        }
+
+        header,
+        footer {
+            background-color: #000;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        header h1 {
+            color: #e50914;
+            font-size: 2rem;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 2rem auto;
+            background-color: #1f1f1f;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .ticket {
+            background-color: #333;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .ticket h2 {
+            color: #e50914;
+        }
+
+        .ticket p {
+            margin: 0.5rem 0;
+        }
+
+        .delete-btn {
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background-color: #e50914;
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: #aaa;
+        }
+
+        button {
+
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #e50914;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Netflix Vé Của Tôi</h1>
+
+        <a href="datve.html">
+            <button>Quay Lại</button>
+        </a>
+    </header>
+
+    <main>
+        <div class="ticket" id="ticketDisplay">
+            <p>Đang tải thông tin vé...</p>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Netflix Vé Phim
+    </footer>
+
+    <script>
+        const ticketDisplay = document.getElementById("ticketDisplay");
+        const ticket = JSON.parse(localStorage.getItem("netflixTicket"));
+
+        function renderTicket() {
+            if (ticket) {
+                ticketDisplay.innerHTML = `
+          <h2>Thông tin vé:</h2>
+          <p><strong>Họ và tên:</strong> ${ticket.name}</p>
+          <p><strong>Phim đã chọn:</strong> ${ticket.movie}</p>
+          <p><strong>Thời gian chiếu:</strong> ${new Date(ticket.time).toLocaleString('vi-VN')}</p>
+          <button class="delete-btn" onclick="deleteTicket()">Xóa vé</button>
+        `;
+            } else {
+                ticketDisplay.innerHTML = `<p>Không có thông tin vé nào được lưu.</p>`;
+            }
+        }
+
+        function deleteTicket() {
+            const confirmDelete = confirm("Bạn có chắc chắn muốn xóa vé này?");
+            if (confirmDelete) {
+                localStorage.removeItem("netflixTicket");
+                renderTicket(); // cập nhật lại giao diện sau khi xóa
+            }
+        }
+
+        renderTicket(); // gọi khi trang load
+    </script>
+</body>
+
+</html>

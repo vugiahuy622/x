@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết phim</title>
+    <link rel="stylesheet" href="xemchitiet.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #141414;
+            color: #fff;
+        }
+
+        header {
+            background: #1d1b1b;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav a {
+            color: #fff;
+            margin-left: 1.5rem;
+            text-decoration: none;
+        }
+
+        .banner {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .banner-content {
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .banner-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .banner-content button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #e50914;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .banner-content button:hover {
+            background: #ff2b2b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #000;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>🎬 NETFLIX</h1>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="lichchieu.html">Lịch Chiếu</a>
+            <a href="datve.html">Đặt Vé</a>
+        </nav>
+    </header>
+
+    <section class="banner" id="banner">
+        <div class="banner-content">
+            <h2 id="movieTitle">Đang tải...</h2>
+            <button id="btnBooking">Đặt Vé Ngay</button>
+            <p id="movieDesc"></p>
+        </div>
+    </section>
+
+    <footer>© 2025 NETFLIX. All rights reserved.</footer>
+
+    <script>
+        // Config Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlne_gt7K1kWxTbBKcAD2Onvy7B8OUcaA",
+            authDomain: "vghh-7999b.firebaseapp.com",
+            projectId: "vghh-7999b",
+            storageBucket: "vghh-7999b.firebasestorage.app",
+            messagingSenderId: "374520262209",
+            appId: "1:374520262209:web:7118e642efe315baa520c0"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Lấy param name từ URL
+        const params = new URLSearchParams(window.location.search);
+        const movieName = params.get("name"); // ví dụ: chitiet.html?name=Ma%20Da
+
+        if (movieName) {
+            db.collection("movies").where("name", "==", movieName).get().then(snapshot => {
+                if (!snapshot.empty) {
+                    const data = snapshot.docs[0].data();
+                    document.getElementById("movieTitle").innerText = data.name;
+                    document.getElementById("movieDesc").innerText = data.description || "Chưa có mô tả.";
+                    document.getElementById("banner").style.backgroundImage = `url('${data.image}')`;
+
+                    document.getElementById("btnBooking").onclick = () => {
+                        window.location.href = "datve.html?movie=" + encodeURIComponent(data.name);
+                    };
+                } else {
+                    document.getElementById("movieTitle").innerText = "Không tìm thấy phim.";
+                }
+            });
+        } else {
+            document.getElementById("movieTitle").innerText = "Thiếu tham số name!";
+        }
+    </script>
+</body>
+
+</html>

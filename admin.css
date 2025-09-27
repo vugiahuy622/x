@@ -1,0 +1,66 @@
+#username {
+    height: 50px;
+    width: 315px;
+    border-radius: 15px;
+}
+
+#email {
+    height: 50px;
+    width: 250px;
+    border-radius: 15px;
+}
+
+#password {
+    height: 50px;
+    width: 225px;
+    border-radius: 15px;
+}
+
+.action-btn {
+    background-color: #e50914;
+    /* đỏ */
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    margin: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #e50914;
+    /* đỏ đậm khi hover */
+}
+
+/* Input style Netflix */
+input {
+    background-color: #e50914;
+    /* đỏ Netflix */
+    color: white;
+    /* chữ trắng */
+    border: none;
+    padding: 12px 16px;
+    margin: 4px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    width: 240px;
+    /* có thể chỉnh tùy ý */
+    transition: 0.3s ease;
+}
+
+/* Placeholder màu trắng nhạt */
+input::placeholder {
+    color: #ffffffcc;
+}
+
+/* Khi focus thì đỏ đậm hơn */
+input:focus {
+    background-color: #b20710;
+    /* đỏ đậm Netflix */
+    box-shadow: 0 0 8px rgba(229, 9, 20, 0.8);
+}
