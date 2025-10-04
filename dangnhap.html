@@ -116,6 +116,10 @@
         return;
       }
 
+      if (username == 'admin' && password == 'admin') {
+        window.location = 'trangadmin.html'
+      }
+
       db.collection("users")
         .where("username", "==", username)
         .get()
