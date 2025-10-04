@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="vi">
+<link rel="stylesheet" href="style.css">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Quản lý vé | Cinema Admin</title>
+    <style>
+        #addBtn {
+            background-color: #ca141d;
+            border-radius: 10px;
+            width: 80px;
+            height: 40px;
+        }
+
+        button {
+            background-color: #e70e19;
+            width: 40PX;
+            height: 30px;
+            border-radius: 10px;
+            color: aliceblue;
+        }
+    </style>
+    <!-- <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #7a0a0a, #1a0000);
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin: 15px 0;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: #e50914;
+        }
+
+        /* Main content */
+        .main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #e50914;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Form thêm vé */
+        .add-ticket {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .add-ticket input {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #e50914;
+            color: #fff;
+            width: 180px;
+            font-weight: bold;
+        }
+
+        .add-ticket button {
+            background: #a8050c;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-ticket button:hover {
+            background: #ff1f2b;
+        }
+
+        /* Danh sách vé */
+        .table-container {
+            background: #111;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background: #e50914;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .edit {
+            background: #007bff;
+            color: white;
+        }
+
+        .delete {
+            background: #e50914;
+            color: white;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: #141414;
+            color: #fff;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background: linear-gradient(to bottom, #330000, #000);
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            color: #e50914;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background: #e50914;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #e50914;
+        }
+
+        .logout {
+            padding: 8px 16px;
+            background: #e50914;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Table */
+        .table-container {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .table-container h2 {
+            margin-bottom: 15px;
+            color: #e50914;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+        }
+
+        th {
+            background: #e50914;
+        }
+
+        tr:hover {
+            background: #2d2d2d;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .btn-edit {
+            background: #0071eb;
+        }
+
+        .btn-delete {
+            background: #e50914;
+        }
+
+        #image {
+            width: 185px;
+            height: 50px;
+            border-radius: 15px;
+        }
+
+        #name {
+            width: 250px;
+            height: 50px;
+            border-radius: 15px;
+        }
+
+        #genre {
+            width: 190px;
+            height: 50px;
+            border-radius: 15px;
+        }
+
+        #duration {
+            width: 200px;
+            height: 50px;
+            border-radius: 15px;
+        }
+
+
+        .action-btn {
+            background-color: #b43333;
+            /* đỏ */
+            color: rgb(31, 29, 29);
+            border: none;
+            padding: 6px 14px;
+            margin: 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background-color: #b20710;
+            /* đỏ đậm khi hover */
+        }
+
+        /* Input style Netflix */
+        input {
+            background-color: #e50914;
+            /* đỏ Netflix */
+            color: white;
+            /* chữ trắng */
+            border: none;
+            padding: 12px 16px;
+            margin: 4px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            outline: none;
+            width: 240px;
+            /* có thể chỉnh tùy ý */
+            transition: 0.3s ease;
+        }
+
+        /* Placeholder màu trắng nhạt */
+        input::placeholder {
+            color: #ffffffcc;
+        }
+
+        /* Khi focus thì đỏ đậm hơn */
+        input:focus {
+            background-color: #b20710;
+            /* đỏ đậm Netflix */
+            box-shadow: 0 0 8px rgba(229, 9, 20, 0.8);
+        }
+
+        #room {
+            margin-left: 21px;
+        }
+
+        #date {
+            margin-left: 15px;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>🍿 Cinema Admin</h2>
+        <ul>
+            <li><a href="trangadmin.html">Admin</a></li>
+            <li><a href="movies.html">Phim</a></li>
+            <li><a href="showtimes.html">Suất chiếu</a></li>
+            <li><a href="tickets.html" class="active">Vé</a></li>
+            <li><a href="index.html" target="_blank">🌐 Trang web chính</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+        <h1>🎟️ Quản lý vé</h1>
+
+        <div class="add-ticket">
+            <input type="text" id="buyer" placeholder="Tên người mua" />
+            <input type="text" id="movie" placeholder="Tên phim" />
+            <input type="text" id="seat" placeholder="Ghế ngồi" />
+            <input type="text" id="price" placeholder="Giá vé (VNĐ)" />
+            <button id="addBtn">+ Thêm vé</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên người mua</th>
+                        <th>Tên phim</th>
+                        <th>Ghế</th>
+                        <th>Giá</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="ticketList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlne_gt7K1kWxTbBKcAD2Onvy7B8OUcaA",
+            authDomain: "vghh-7999b.firebaseapp.com",
+            projectId: "vghh-7999b",
+            storageBucket: "vghh-7999b.firebasestorage.app",
+            messagingSenderId: "374520262209",
+            appId: "1:374520262209:web:7118e642efe315baa520c0",
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const ticketList = document.getElementById("ticketList");
+        const addBtn = document.getElementById("addBtn");
+
+        // Load danh sách vé
+        async function loadTickets() {
+            ticketList.innerHTML = "";
+            const snapshot = await db.collection("tickets").get();
+            snapshot.forEach(doc => {
+                const t = doc.data();
+                ticketList.innerHTML += `
+          <tr>
+            <td>${t.buyer}</td>
+            <td>${t.movie}</td>
+            <td>${t.seat}</td>
+            <td>${t.price}</td>
+            <td>
+            <button class="btn edit" onclick="editTicket('${doc.id}', '${t.buyer}', '${t.movie}', '${t.seat}', '${t.price}')">Sửa</button>
+              <button class="btn delete" onclick="deleteTicket('${doc.id}')">Xóa</button>
+            </td>
+          </tr>
+        `;
+            });
+        }
+
+        // Thêm vé
+        addBtn.addEventListener("click", async () => {
+            const buyer = document.getElementById("buyer").value.trim();
+            const movie = document.getElementById("movie").value.trim();
+            const seat = document.getElementById("seat").value.trim();
+            const price = document.getElementById("price").value.trim();
+
+            if (!buyer || !movie || !seat || !price) {
+                alert("Vui lòng nhập đầy đủ thông tin vé!");
+                return;
+            }
+
+            await db.collection("tickets").add({ buyer, movie, seat, price });
+            alert("Thêm vé thành công!");
+            loadTickets();
+        });
+
+        // Sửa vé
+        async function editTicket(id, buyer, movie, seat, price) {
+            const newBuyer = prompt("Tên người mua:", buyer);
+            const newMovie = prompt("Tên phim:", movie);
+            const newSeat = prompt("Ghế:", seat);
+            const newPrice = prompt("Giá:", price);
+
+            if (newBuyer && newMovie && newSeat && newPrice) {
+                await db.collection("tickets").doc(id).update({
+                    buyer: newBuyer,
+                    movie: newMovie,
+                    seat: newSeat,
+                    price: newPrice
+                });
+                loadTickets();
+            }
+        }
+
+        // Xóa vé
+        async function deleteTicket(id) {
+            if (confirm("Bạn có chắc muốn xóa vé này?")) {
+                await db.collection("tickets").doc(id).delete();
+                loadTickets();
+            }
+        }
+
+        // Khởi động
+        loadTickets();
+    </script>
+</body>
+
+</html>
