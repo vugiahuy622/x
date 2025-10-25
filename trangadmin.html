@@ -165,6 +165,24 @@
         .btn:hover {
             opacity: 0.9;
         }
+
+        .logout-btn {
+            background-color: #e50914;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+            margin: 15px;
+            transition: 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #ff3b3b;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
@@ -191,7 +209,9 @@
             <input type="password" id="password" placeholder="Password">
             <button class="action-btn" id="saveButton">Thêm User</button>
             <span id="status"></span>
+            <button id="logoutBtn" class="logout-btn">Đăng xuất</button>
         </div><br>
+
 
         <table>
             <thead>
@@ -285,11 +305,72 @@
                         loadUsers();
                     })
                     .catch(err => alert("Lỗi xóa: " + err.message));
+
+
+
             }
         }
 
+
+
+
         // Load danh sách khi mở trang
     </script>
+
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <script>
+
+
+        // firebase.initializeApp(firebaseConfig);
+        // const auth = firebase.auth();
+
+        // // 🧠 Kiểm tra user đang đăng nhập
+        // window.onload = function () {
+        //     const userData = localStorage.getItem("user");
+        //     if (!userData) {
+        //         // ❌ Chưa đăng nhập → quay lại trang chủ
+        //         window.location.href = "index.html";
+        //     }
+        // };
+
+        // // 🚪 Xử lý khi click "Đăng xuất"
+        // document.getElementById("logoutBtn").addEventListener("click", () => {
+        //     // Nếu bạn đang dùng Firebase Auth (đăng nhập qua email/password Firebase):
+        //     auth.signOut().then(() => {
+        //         // Xóa user lưu trong localStorage
+        //         localStorage.removeItem("user");
+        //         alert("Đăng xuất thành công!");
+        //         window.location.href = "index.html"; // 👉 quay về trang chủ
+        //     }).catch((error) => {
+        //         console.error("Lỗi đăng xuất:", error);
+        //         alert("Đăng xuất thất bại!");
+        //     });
+        // });
+
+        // ✅ Khi tải trang
+        window.onload = function () {
+            const user = localStorage.getItem("user");
+
+            // Nếu chưa đăng nhập thì tự động quay về trang chủ
+            // if (!user) {
+            //     alert("Bạn cần đăng nhập để vào trang admin!");
+            //     window.location.href = "index.html";
+        }
+        // };
+
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("user"); // Xóa thông tin đăng nhập
+            alert("Đăng xuất thành công!");
+            window.location.href = "index.html"; // Quay lại trang chủ
+        });
+    </script>
+
 </body>
 
 </html>
